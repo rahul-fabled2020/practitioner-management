@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-// import swaggerSpec from './utils/swagger';
+import swaggerSpec from "../utils/swagger";
 import practitionerRoutes from "./practitionerRoutes";
 
 /**
@@ -11,12 +11,24 @@ const router = Router();
 /**
  * GET /api/swagger.json
  */
-// router.get('/swagger.json', (req, res) => {
-//   res.json(swaggerSpec);
-// });
+router.get("/swagger.json", (req, res) => {
+  res.json(swaggerSpec);
+});
 
 /**
- * GET /api
+ * @swagger
+ * /api:
+ *  get:
+ *    summary: Health Check
+ *    responses:
+ *      200:
+ *        description: "The App is Running."
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/HealthCheckSchema'
+ *      500:
+ *        description: Something went wrong.
  */
 router.get("/", (req, res) => {
   res.json({
@@ -25,6 +37,9 @@ router.get("/", (req, res) => {
   });
 });
 
+/**
+ * Practitioner Routes
+ */
 router.use("/practitioners", practitionerRoutes);
 
 export default router;

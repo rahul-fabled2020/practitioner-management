@@ -1,11 +1,24 @@
 import Boom from "@hapi/boom";
+
 import { Practitioner, PractitionerSchemaType } from "../models/Practitioner";
+
 import { PRACTITIONER_MESSAGES } from "../constants/messages";
 
+/**
+ * It returns all the practitioners in the database
+ *
+ * @returns {Promise} An array of all the practitioners in the database.
+ */
 export const fetchAll = () => {
   return Practitioner.find({});
 };
 
+/**
+ * It fetches a practitioner by id
+ *
+ * @param {String} id - String - The id of the practitioner we want to fetch.
+ * @returns {Promise} The practitioner is being returned.
+ */
 export const fetchById = async (id: String) => {
   const practitioner = await Practitioner.findById(id);
 
@@ -16,10 +29,23 @@ export const fetchById = async (id: String) => {
   return practitioner;
 };
 
+/**
+ * It creates a practitioner in the database
+ *
+ * @param {PractitionerSchemaType} practitioner - PractitionerSchemaType
+ * @returns {Promise} A promise that resolves to the practitioner that was created.
+ */
 export const create = (practitioner: PractitionerSchemaType) => {
   return Practitioner.create(practitioner);
 };
 
+/**
+ * It finds a practitioner by id, updates it with the new data, and returns the updated practitioner
+ *
+ * @param {String} id - The id of the practitioner to update
+ * @param {PractitionerSchemaType} practitioner - PractitionerSchemaType
+ * @returns {Promise} The updated practitioner
+ */
 export const update = async (
   id: String,
   practitioner: PractitionerSchemaType
@@ -36,6 +62,12 @@ export const update = async (
   return updatedPractitioner;
 };
 
+/**
+ * It finds a practitioner by id and deletes it
+ *
+ * @param {String} id - The id of the practitioner to be deleted.
+ * @returns {Promise} The practitioner that was deleted.
+ */
 export const destroy = async (id: String) => {
   const practitioner = await Practitioner.findByIdAndDelete(id);
 

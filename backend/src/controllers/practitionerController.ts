@@ -1,5 +1,5 @@
-import { NextFunction, Request, Response } from "express";
 import HttpStatus from "http-status-codes";
+import { NextFunction, Request, Response } from "express";
 
 import * as practitionerService from "../services/practitionerService";
 
