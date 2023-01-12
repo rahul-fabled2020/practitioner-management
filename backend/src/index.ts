@@ -3,27 +3,36 @@ import dotenv from "dotenv";
 import morgan from "morgan";
 import helmet from "helmet";
 import swaggerUi from "swagger-ui-express";
+import fileUpload from "express-fileupload";
 import { Request, Response } from "express";
+import { v2 as cloudinary } from "cloudinary";
 import * as errorHandler from "./middlewares/errorHandler";
 
 import routes from "./routes";
 import swaggerSpec from "./utils/swagger";
+import {
+  cloudinaryConfig,
+  applicationConfig,
+  expressFileUploadConfig,
+} from "./config/config";
 
 dotenv.config();
+cloudinary.config(cloudinaryConfig);
 
 const express = require("express");
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = applicationConfig.serverPort;
 
-app.locals.title = process.env.APP_NAME;
-app.locals.version = process.env.APP_VERSION;
+app.locals.title = applicationConfig.appName;
+app.locals.version = applicationConfig.appVersion;
 
 app.use(cors());
 app.use(helmet());
 app.use(morgan("tiny"));
 app.use(express.json());
 app.use(errorHandler.bodyParser);
+app.use(fileUpload(expressFileUploadConfig));
 
 // API Routes
 app.use("/api", routes);

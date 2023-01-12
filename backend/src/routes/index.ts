@@ -1,6 +1,8 @@
 import { Router } from "express";
 
 import swaggerSpec from "../utils/swagger";
+
+import fileRoutes from "./fileRoutes";
 import practitionerRoutes from "./practitionerRoutes";
 
 /**
@@ -41,5 +43,10 @@ router.get("/", (req, res) => {
  * Practitioner Routes
  */
 router.use("/practitioners", practitionerRoutes);
+
+/**
+ * File Routes
+ */
+router.use("/files", fileRoutes);
 
 export default router;

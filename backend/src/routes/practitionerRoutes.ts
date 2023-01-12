@@ -1,4 +1,9 @@
 import express from "express";
+
+import {
+  practitionerValidator,
+  validateEmailExistence,
+} from "../validators/practitionerValidator";
 import * as practitionerController from "../controllers/practitionerController";
 
 const router = express.Router();
@@ -84,7 +89,12 @@ router.get("/:id", practitionerController.fetchById);
  *      404:
  *        description: Not found
  */
-router.post("/", practitionerController.create);
+router.post(
+  "/",
+  practitionerValidator,
+  validateEmailExistence,
+  practitionerController.create
+);
 
 /**
  *  @openapi
@@ -123,7 +133,12 @@ router.post("/", practitionerController.create);
  *      404:
  *        description: Not Found
  */
-router.put("/:id", practitionerController.update);
+router.put(
+  "/:id",
+  practitionerValidator,
+  validateEmailExistence,
+  practitionerController.update
+);
 
 /**
  *  @openapi
