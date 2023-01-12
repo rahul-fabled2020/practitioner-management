@@ -7,10 +7,11 @@ import { PRACTITIONER_MESSAGES } from "../constants/messages";
 /**
  * It returns all the practitioners in the database
  *
+ * @param query - The query object is used to filter the results.
  * @returns {Promise} An array of all the practitioners in the database.
  */
-export const fetchAll = () => {
-  return Practitioner.find({});
+export const fetchAll = (query = {}) => {
+  return Practitioner.find(query);
 };
 
 /**

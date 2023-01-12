@@ -1,4 +1,5 @@
-import mongoose, { ConnectOptions } from 'mongoose';
+import mongoose from "mongoose";
+import { mongooseConfig } from "../config/config";
 
 export type Connection = mongoose.Connection;
 
@@ -12,9 +13,9 @@ export interface DatabaseFactory {
 
 export class MongooseDatabaseFactory implements DatabaseFactory {
   createConnection(connectionString: string): Connection {
-    return mongoose.createConnection(connectionString, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    } as ConnectOptions);
+    return mongoose.createConnection(
+      connectionString,
+      mongooseConfig.connectionOptions
+    );
   }
 }
