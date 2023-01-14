@@ -2,6 +2,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import morgan from "morgan";
 import helmet from "helmet";
+import cookieParser from "cookie-parser";
 import swaggerUi from "swagger-ui-express";
 import fileUpload from "express-fileupload";
 import { Request, Response } from "express";
@@ -27,6 +28,7 @@ const port = applicationConfig.serverPort;
 app.locals.title = applicationConfig.appName;
 app.locals.version = applicationConfig.appVersion;
 
+app.use(cookieParser());
 app.use(cors());
 app.use(helmet());
 app.use(morgan("tiny"));

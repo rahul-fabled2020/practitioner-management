@@ -1,7 +1,9 @@
 import { Router } from "express";
 
 import swaggerSpec from "../utils/swagger";
+import { authenticateUser } from "../validators/authValidator";
 
+import authRoutes from "./authRoutes";
 import fileRoutes from "./fileRoutes";
 import practitionerRoutes from "./practitionerRoutes";
 
@@ -9,13 +11,6 @@ import practitionerRoutes from "./practitionerRoutes";
  * Contains all API routes for the application.
  */
 const router = Router();
-
-/**
- * GET /api/swagger.json
- */
-router.get("/swagger.json", (req, res) => {
-  res.json(swaggerSpec);
-});
 
 /**
  * @swagger
@@ -40,13 +35,25 @@ router.get("/", (req, res) => {
 });
 
 /**
+ * GET /api/swagger.json
+ */
+router.get("/swagger.json", (req, res) => {
+  res.json(swaggerSpec);
+});
+
+/**
+ * Auth Routes
+ */
+router.use("/auth", authRoutes);
+
+/**
  * Practitioner Routes
  */
-router.use("/practitioners", practitionerRoutes);
+router.use("/practitioners", authenticateUser, practitionerRoutes);
 
 /**
  * File Routes
  */
-router.use("/files", fileRoutes);
+router.use("/files", authenticateUser, fileRoutes);
 
 export default router;
