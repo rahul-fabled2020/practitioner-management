@@ -20,3 +20,17 @@ export const FILE_UPLOAD_MESSAGES = {
     "Invalid file type. Only image, PDF and Excel files are allowed.",
   INVALID_SIZE: MESSAGES.INVALID_SIZE(FILE_SIZE_LIMIT),
 };
+
+export const AUTH_MESSAGES = {
+  PASSWORD_MISMATCH: "Password do not match",
+  NOT_FOUND: MESSAGES.NOT_FOUND("User"),
+  COULD_NOT_REFRESH_TOKEN: "Could not refresh access token",
+  NOT_LOGIN: "You are not logged in",
+  INVALID_TOKEN: "Invalid token or user doesn't exist",
+  SESSION_EXPIRED: "User session has expired",
+  NO_USER_EXISTS: "User with that token no longer exist",
+};
+
+export const USER_MESSAGES = {
+  EMAIL_ALREADY_EXISTS: MESSAGES.ALREADY_EXISTS("Email"),
+};
