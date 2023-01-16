@@ -16,7 +16,7 @@ export const signJwt = (
 
   return jwt.sign(payload, privateKey, {
     ...(options && options),
-    // algorithm: jwtConfig.signingAlgorithm,
+    algorithm: jwtConfig.signingAlgorithm,
   });
 };
 
