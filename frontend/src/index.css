@@ -1,6 +1,122 @@
+:root {
+  --color-grey-50: #fafafa;
+  --color-grey-200: #eeeeee;
+  --color-grey-300: #e0e0e0;
+  --color-grey-400: #bdbdbd;
+  --color-grey-500: #9e9e9e;
+  --color-grey-600: #757575;
+  --color-grey-700: #616161;
+  --color-grey-900: #212121;
+
+  --color-xanadu: #707571;
+  --color-white: #ffffff;
+
+  --spacing-0_5x: 0.063rem;
+  --spacing-1x: 0.25rem;
+  --spacing-1_5: 0.375rem;
+  --spacing-1_6: 0.438rem;
+  --spacing-2x: 0.5rem;
+  --spacing-2_5: 0.625rem;
+  --spacing-3x: 0.75rem;
+  --spacing-4x: 1rem;
+  --spacing-5x: 1.25rem;
+  --spacing-6x: 1.5rem;
+  --spacing-7x: 1.75rem;
+  --spacing-8x: 2rem;
+  --spacing-9x: 2.25rem;
+  --spacing-10x: 2.5rem;
+  --spacing-10_5x: 2.625rem;
+  --spacing-11x: 2.75rem;
+  --spacing-12x: 3rem;
+  --spacing-12_5x: 3.125rem;
+  --spacing-13x: 3.25rem;
+  --spacing-14x: 3.5rem;
+  --spacing-15x: 3.75rem;
+  --spacing-16x: 4rem;
+  --spacing-17x: 4.25rem;
+  --spacing-18x: 5rem;
+  --spacing-24x: 6.125rem;
+  --spacing-25x: 6.25rem;
+  --spacing-35x: 8.75rem;
+  --spacing-40x: 10rem;
+  --spacing-47x: 11.75rem;
+  --spacing-50x: 12.5rem;
+  --spacing-53x: 13.25rem;
+  --spacing-59x: 14.75rem;
+  --spacing-65x: 18.75rem;
+  --spacing-66x: 19.375rem;
+
+  --theme-font-family: Roboto;
+
+  /* Font Sizes */
+  --font-xxs: 0.5rem;
+  --font-xs: 0.625rem;
+  --font-s: 0.75rem;
+  --font-md: 0.875rem;
+  --font-xmd: 0.95rem;
+  --font-main: 1rem;
+  --font-lg: 1.125rem;
+  --font-xlg: 1.25rem;
+  --font-xxlg: 1.5rem;
+
+  --font-size-h1: 6rem;
+  --font-size-h2: 3.75rem;
+  --font-size-h3: 3rem;
+  --font-size-h4: 2.125rem;
+  --font-size-h5: 1.5rem;
+  --font-size-h6: 1.25rem;
+  --font-size-body-1: 1rem;
+  --font-size-body-2: 0.875rem;
+  --font-size-small: 0.8125rem;
+  --font-size-caption: 0.75rem;
+  --font-size-overline: 0.625rem;
+  --font-size-12: 12px;
+  --font-size-14: 14px;
+  --font-size-16: 16px;
+
+  /* Font Weight */
+  --fontWeight-thin: 300;
+  --fontWeight-normal: 400;
+  --fontWeight-semibold: 500;
+  --fontWeight-black: 700;
+  --fontWeight-extrablack: 900;
+
+  /* Letter spacing */
+  --letter-spacing-light-1: -1.5px;
+  --letter-spacing-light-2: -0.5px;
+  --letter-spacing-light-3: -0.25px;
+  --letter-spacing-regular: 0;
+  --letter-spacing-medium: 0.25px;
+  --letter-spacing-subtitle-1: 0.15px;
+  --letter-spacing-subtitle-2: 0.1px;
+  --letter-spacing-button: 0.75px;
+  --letter-spacing-caption: 0.4px;
+  --letter-spacing-overline: 1.5px;
+
+  /* Line height */
+  --line-height-h1: 9rem;
+  --line-height-h2: 5.625rem;
+  --line-height-h3: 4.5rem;
+  --line-height-h4: 3.1875rem;
+  --line-height-h5: 2.25rem;
+  --line-height-h6: 1.875rem;
+  --line-height-body: 1.5rem;
+  --line-height-23: 1.4375rem;
+  --line-height-subtitle: 1.3125;
+  --line-height-small: 1.125rem;
+  --line-height-caption: 1rem;
+  --line-height-14: 0.875rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: var(--theme-font-family), -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
