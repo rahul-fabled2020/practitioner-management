@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect } from 'react';
+import { FunctionComponent, useEffect, useState } from 'react';
 
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
@@ -8,6 +8,8 @@ import FormControl from '@mui/material/FormControl';
 import { Formik, Form } from 'formik';
 import { useDispatch } from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';
+
+import RegistrationDialog from '../../components/registration-dialog/RegistrationDialog';
 
 import { AppDispatch } from '../../redux/store';
 import { setCredentials, signIn } from '../../redux/slices/authSlice';
@@ -34,6 +36,7 @@ const LoginPage: FunctionComponent<LoginPageProps> = () => {
   const auth = useAuth();
   const location = useLocation();
   const dispatch = useDispatch<AppDispatch>();
+  const [registrationDialogOpened, setRegistrationDialogOpened] = useState(false);
 
   async function onSubmit(values: SignInPayload, { setSubmitting }: any) {
     try {
@@ -67,6 +70,7 @@ const LoginPage: FunctionComponent<LoginPageProps> = () => {
 
   return (
     <>
+      <RegistrationDialog isOpened={registrationDialogOpened} onClose={() => setRegistrationDialogOpened(false)} />
       <div className="login-page">
         <div className="login-page__container">
           <Grid container>
@@ -138,7 +142,10 @@ const LoginPage: FunctionComponent<LoginPageProps> = () => {
                 </div>
 
                 <div className="login-page__form-footer">
-                  New to Practitioner Management? <u>Create an Account</u>
+                  New to Practitioner Management?{' '}
+                  <span className="create-account" onClick={() => setRegistrationDialogOpened(true)}>
+                    Create an Account
+                  </span>
                 </div>
               </div>
             </Grid>

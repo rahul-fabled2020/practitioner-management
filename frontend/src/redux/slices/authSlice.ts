@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-import { SignInPayload } from '../../interfaces/interfaces';
+import { SignInPayload, SignUpPayload } from '../../interfaces/interfaces';
 import { AuthState } from '../../interfaces/states';
-import { signIn as login } from '../../services/authService';
+import { signIn as login, signUp as createUser } from '../../services/authService';
 import { showErrorMessage } from '../../utils/toast';
 import { getUserFromToken } from '../../utils/token';
 
@@ -14,7 +14,16 @@ const signIn = createAsyncThunk('auth/signIn', async (payload: SignInPayload, th
 
     return response.data;
   } catch (error: any) {
-    throw new Error(error.response.data.error.message);
+    throw new Error(error?.response?.data?.error?.message);
+  }
+});
+const signUp = createAsyncThunk('users/createUser', async (payload: SignUpPayload) => {
+  try {
+    const response = await createUser(payload);
+
+    return response.data;
+  } catch (error: any) {
+    throw new Error(error?.response?.data?.error?.message);
   }
 });
 
@@ -54,10 +63,20 @@ const authSlice = createSlice({
 
       showErrorMessage(action.error.message as string);
     });
+
+    builder.addCase(signUp.fulfilled, (state, action) => {
+      const user = action.payload.data;
+
+      state.user = user;
+    });
+
+    builder.addCase(signUp.rejected, (state, action) => {
+      showErrorMessage(action.error.message as string);
+    });
   },
 });
 
-export { signIn };
+export { signIn, signUp };
 export const { setCredentials, logOut, setAccessToken } = authSlice.actions;
 
 export default authSlice.reducer;
