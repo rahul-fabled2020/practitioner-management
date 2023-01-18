@@ -84,3 +84,13 @@
   margin-top: 48px;
   text-align: center;
 }
+
+.create-account {
+  text-decoration: underline;
+  color: blue;
+}
+
+.create-account:hover {
+  cursor: pointer;
+  color: #3333ff;
+}
