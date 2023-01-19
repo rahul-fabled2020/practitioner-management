@@ -1,1 +1,3 @@
-import './RegistrationDialog';
+import RegistrationDialog from './RegistrationDialog';
+
+export default RegistrationDialog;

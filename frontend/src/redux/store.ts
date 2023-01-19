@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import authReducer from './slices/authSlice';
+import practitionerReducer from './slices/practitionerSlice';
 
 const store = configureStore({
-  reducer: { auth: authReducer },
+  reducer: { auth: authReducer, practitioner: practitionerReducer },
   middleware(getDefaultMiddleware) {
     return getDefaultMiddleware();
   },
@@ -12,4 +13,4 @@ const store = configureStore({
 
 export default store;
 export type AppDispatch = typeof store.dispatch;
-export type RootState = ReturnType<typeof store.getState>
+export type RootState = ReturnType<typeof store.getState>;
