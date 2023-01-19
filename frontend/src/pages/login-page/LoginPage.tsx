@@ -42,7 +42,6 @@ const LoginPage: FunctionComponent<LoginPageProps> = () => {
     try {
       await dispatch(signIn(values));
     } catch (error: any) {
-      console.log('Login', error);
       showErrorMessage(error.response.data.error.message);
     } finally {
       setSubmitting(false);
@@ -60,7 +59,7 @@ const LoginPage: FunctionComponent<LoginPageProps> = () => {
         dispatch(setCredentials({ user, accessToken }));
       } catch (error) {}
     })();
-  }, []);
+  }, [dispatch]);
 
   if (auth.isLoggedIn()) {
     const navigateTo: string = location?.state?.from?.pathname || '/';

@@ -20,6 +20,7 @@ export interface SignInPayload {
 }
 
 export interface Practitioner {
+  _id?: string;
   fullName: string;
   email: string;
   contact: string;
@@ -34,4 +35,9 @@ export interface Practitioner {
   isICUSpecialist?: boolean;
   createdAt?: Date;
   updatedAt?: Date;
+}
+
+export interface DialogOptions {
+  data?: any;
+  isOpened: boolean;
 }

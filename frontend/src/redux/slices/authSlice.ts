@@ -1,10 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-import { SignInPayload, SignUpPayload } from '../../interfaces/interfaces';
 import { AuthState } from '../../interfaces/states';
-import { signIn as login, signUp as createUser } from '../../services/authService';
+import { SignInPayload, SignUpPayload } from '../../interfaces/interfaces';
+
 import { showErrorMessage } from '../../utils/toast';
 import { getUserFromToken } from '../../utils/token';
+
+import { signIn as login, signUp as createUser, signOut as logOutUser } from '../../services/authService';
 
 const initialState: AuthState = { user: { name: '', email: '' }, accessToken: '', isLoading: false };
 
@@ -22,6 +24,15 @@ const signUp = createAsyncThunk('users/createUser', async (payload: SignUpPayloa
     const response = await createUser(payload);
 
     return response.data;
+  } catch (error: any) {
+    throw new Error(error?.response?.data?.error?.message);
+  }
+});
+const signOut = createAsyncThunk('auth/signOut', async () => {
+  try {
+    const response = await logOutUser();
+
+    return response?.data;
   } catch (error: any) {
     throw new Error(error?.response?.data?.error?.message);
   }
@@ -46,6 +57,7 @@ const authSlice = createSlice({
     },
   },
   extraReducers(builder) {
+    // Sign In
     builder.addCase(signIn.pending, (state, action) => {
       state.isLoading = true;
     });
@@ -64,6 +76,7 @@ const authSlice = createSlice({
       showErrorMessage(action.error.message as string);
     });
 
+    // Sign Up
     builder.addCase(signUp.fulfilled, (state, action) => {
       const user = action.payload.data;
 
@@ -71,6 +84,15 @@ const authSlice = createSlice({
     });
 
     builder.addCase(signUp.rejected, (state, action) => {
+      showErrorMessage(action.error.message as string);
+    });
+
+    // Sign Out
+    builder.addCase(signOut.fulfilled, (state, action) => {
+      state.user = null;
+      state.accessToken = '';
+    });
+    builder.addCase(signOut.rejected, (state, action) => {
       showErrorMessage(action.error.message as string);
     });
   },

@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 
+import Dashboard from './pages/dashboard';
 import LoginPage from './pages/login-page';
 import ProtectedRoute from './components/common/protected-route/ProtectedRoute';
 
@@ -24,7 +25,7 @@ function App() {
 
           {/* Private Routes */}
           <Route path="/" element={<ProtectedRoute />}>
-            <Route index element={<div>Dashboard</div>} />
+            <Route index element={<Dashboard />} />
             <Route path="/profile" element={<div>Profile</div>} />
           </Route>
 
