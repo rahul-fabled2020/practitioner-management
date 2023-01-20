@@ -4,6 +4,7 @@ const MESSAGES = {
   VALID_EMAIL: (fieldName: string) => `${fieldName} must be a valid email.`,
   INVALID_LENGTH: (fieldName: string, length: number) => `${fieldName} must be at least ${length} characters long.`,
   DELETED: (resource: string) => `${resource} deleted successfully.`,
+  EDITED: (resource: string) => `${resource} edited successfully.`,
 };
 
 export const AUTH_MESSAGES = {
@@ -18,4 +19,6 @@ export const AUTH_MESSAGES = {
 
 export const PRACTITIONER_MESSAGES = {
   DELETED: MESSAGES.DELETED('Practitioner'),
+  CREATED: MESSAGES.CREATED('Practitioner'),
+  EDITED: MESSAGES.EDITED('Practitioner'),
 };

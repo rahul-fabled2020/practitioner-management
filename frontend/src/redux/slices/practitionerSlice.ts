@@ -1,7 +1,13 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { destroy as destroyPractitioner, fetchAll as fetchAllPractitioners } from '../../services/practitionerService';
+import {
+  create as createPractitioner,
+  destroy as destroyPractitioner,
+  edit as editPractitioner,
+  fetchAll as fetchAllPractitioners,
+} from '../../services/practitionerService';
 import { PractitionerState } from '../../interfaces/states';
 import { showErrorMessage } from '../../utils/toast';
+import { Practitioner } from '../../interfaces/interfaces';
 
 const initialState: PractitionerState = {
   practitioners: [],
@@ -22,6 +28,23 @@ const deletePractitioner = createAsyncThunk('practitioners/deletePractitioner', 
     return error?.response?.data?.error?.message || error.message;
   }
 });
+const savePractitioner = createAsyncThunk('practitioners/savePractitioner', async (payload: Practitioner) => {
+  try {
+    return createPractitioner(payload);
+  } catch (error: any) {
+    return error?.response?.data?.error?.message || error.message;
+  }
+});
+const updatePractitioner = createAsyncThunk(
+  'practitioners/updatePractitioner',
+  async ({ id, payload }: { id: string; payload: Practitioner }) => {
+    try {
+      return editPractitioner(id, payload);
+    } catch (error: any) {
+      return error?.response?.data?.error?.message || error.message;
+    }
+  }
+);
 
 const practitionerSlice = createSlice({
   name: 'practitioner',
@@ -45,9 +68,19 @@ const practitionerSlice = createSlice({
     builder.addCase(deletePractitioner.rejected, (state, action) => {
       showErrorMessage(action.error.message as string);
     });
+
+    // Create
+    builder.addCase(savePractitioner.rejected, (state, action) => {
+      showErrorMessage(action.error.message as string);
+    });
+
+    // Update
+    builder.addCase(updatePractitioner.rejected, (state, action) => {
+      showErrorMessage(action.error.message as string);
+    });
   },
 });
 
-export { getPractitioners, deletePractitioner };
+export { getPractitioners, deletePractitioner, savePractitioner, updatePractitioner };
 
 export default practitionerSlice.reducer;

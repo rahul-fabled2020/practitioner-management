@@ -42,7 +42,7 @@ const LoginPage: FunctionComponent<LoginPageProps> = () => {
     try {
       await dispatch(signIn(values));
     } catch (error: any) {
-      showErrorMessage(error.response.data.error.message);
+      showErrorMessage(error?.response?.data?.error?.message || error.message);
     } finally {
       setSubmitting(false);
     }

@@ -105,11 +105,11 @@ export const setupAxios = (store: any) => {
       }
 
       if (!gotUnauthorizedError(response)) {
-        let errorMessage = responseError?.response?.data?.error?.message;
+        let errorMessage = responseError?.response?.data?.error?.message || responseError?.message;
         const statusCode = responseError?.response?.status;
 
         if (config.responseType === RESPONSE_TYPES.BLOB && statusCode === 400) {
-          const responseString = await responseError.response.data.text();
+          const responseString = await responseError?.response?.data?.text?.();
           const responseJson = JSON.parse(responseString);
 
           errorMessage = responseJson.message;

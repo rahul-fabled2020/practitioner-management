@@ -8,14 +8,17 @@ import Chip from '@mui/material/Chip';
 import Switch from '@mui/material/Switch';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { convertTo12HourTime, convertToYYYYMMDD } from '../../utils/date';
-import { DAYS_COLOR } from '../../constants/constant';
+import { DAYS_COLOR, Mode } from '../../constants/constant';
 import defaultProfilePic from '../../images/profile.png';
 import { DialogOptions, Practitioner } from '../../interfaces/interfaces';
 import ConfirmationDialog from '../../components/common/confirmation-dialog';
 import { showSuccessMessage } from '../../utils/toast';
 import { PRACTITIONER_MESSAGES } from '../../constants/messages';
+import PractitionerDialog from '../../components/practitioner-dialog';
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
 
 interface DashboardProps {}
 
@@ -27,6 +30,11 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
   const [confirmationOptions, setConfirmationOptions] = useState<DialogOptions>({
     data: {},
     isOpened: false,
+  });
+  const [practitionerDialogOptions, setPractitionerDialogOptions] = useState<DialogOptions>({
+    data: {},
+    isOpened: false,
+    mode: Mode.CREATE,
   });
 
   const sortedPractitioners = useMemo(() => {
@@ -43,7 +51,15 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
     dispatch(getPractitioners());
   }, [dispatch]);
 
-  const handleEdit = (id: string) => {};
+  const handleEdit = (id: string) => {
+    const practitioner = practitioners?.find((practitioner: Practitioner) => practitioner._id === id);
+
+    setPractitionerDialogOptions({
+      isOpened: true,
+      data: practitioner,
+      mode: Mode.EDIT,
+    });
+  };
   const handleDelete = (id: string) => {
     const practitioner = practitioners?.find((practitioner: Practitioner) => practitioner._id === id);
 
@@ -201,7 +217,15 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
         cancelButtonText="Cancel"
         message={`Are you sure to delete ${confirmationOptions?.data?.fullName || 'practitioner'}?`}
       />
-      <Box sx={{ height: 400, width: '100%' }}>
+      {practitionerDialogOptions.isOpened ? (
+        <PractitionerDialog
+          isOpened={true}
+          mode={practitionerDialogOptions.mode}
+          onClose={() => setPractitionerDialogOptions(previousValues => ({ ...previousValues, isOpened: false }))}
+          data={practitionerDialogOptions.data}
+        />
+      ) : null}
+      <Box sx={{ height: 600, width: '100%' }}>
         <DataGrid
           rows={sortedPractitioners}
           getRowId={row => row._id}
@@ -212,6 +236,17 @@ const Dashboard: FunctionComponent<DashboardProps> = () => {
           getRowHeight={() => 'auto'}
         />
       </Box>
+      <div
+        className="fab-container"
+        style={{ position: 'fixed', bottom: 48, right: 48 }}
+        onClick={() =>
+          setPractitionerDialogOptions(previousValues => ({ ...previousValues, isOpened: true, mode: Mode.CREATE }))
+        }
+      >
+        <Fab color="error" aria-label="add" style={{ height: 100, width: 100 }}>
+          <AddIcon fontSize="large" />
+        </Fab>
+      </div>
     </div>
   );
 };

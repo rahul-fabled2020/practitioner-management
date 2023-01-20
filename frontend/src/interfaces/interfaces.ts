@@ -1,6 +1,9 @@
+import { Dayjs } from 'dayjs';
+import { Mode } from '../constants/constant';
+
 export enum Gender {
   MALE = 'male',
-  FEMAILE = 'female',
+  FEMALE = 'female',
   OTHER = 'other',
 }
 
@@ -24,11 +27,11 @@ export interface Practitioner {
   fullName: string;
   email: string;
   contact: string;
-  dob: Date;
+  dob: Date | number | Dayjs;
   photographUrl?: string;
   workingDays: string[];
-  startTime: Date;
-  endTime: Date;
+  startTime: Date | number | Dayjs;
+  endTime: Date | number | Dayjs;
   address?: string;
   gender: Gender;
   notes?: string;
@@ -39,5 +42,6 @@ export interface Practitioner {
 
 export interface DialogOptions {
   data?: any;
+  mode?: Mode;
   isOpened: boolean;
 }

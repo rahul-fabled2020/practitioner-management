@@ -14,7 +14,7 @@ const signIn = createAsyncThunk('auth/signIn', async (payload: SignInPayload, th
   try {
     const response = await login(payload);
 
-    return response.data;
+    return response?.data;
   } catch (error: any) {
     throw new Error(error?.response?.data?.error?.message);
   }
