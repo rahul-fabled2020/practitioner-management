@@ -30,6 +30,8 @@ const customEndTimeValidator: CustomValidator = (
 
 // Validation schema
 export const schema = Joi.object({
+  __v: Joi.number().allow(null),
+  _id: Joi.string().allow(null),
   fullName: Joi.string().trim().required(),
   email: Joi.string().email().required(),
   contact: Joi.string().trim().required().length(10),

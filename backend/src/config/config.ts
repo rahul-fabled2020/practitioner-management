@@ -26,6 +26,13 @@ export const expressFileUploadConfig = {
   },
 };
 
+export const corsConfig = {
+  origin: process.env.ALLOWED_ORIGINS?.split?.(",") || [
+    "http://localhost:3000",
+  ],
+  credentials: true,
+};
+
 export const cloudinaryConfig = {
   api_key: process.env.CLOUDINARY_API_KEY,
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -61,7 +68,7 @@ export const jwtConfig: {
 } = {
   encoding: "base64",
   encodingOutput: "ascii",
-  signingAlgorithm: "RS256",
+  signingAlgorithm: (process.env.SIGNING_ALGORITHM as Algorithm) || "HS256",
   privateKeys: {
     [TOKEN_TYPE.ACCESS_TOKEN_PRIVATE_KEY]:
       process.env.ACCESS_TOKEN_PRIVATE_KEY || "",

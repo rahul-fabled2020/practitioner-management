@@ -12,6 +12,7 @@ import * as errorHandler from "./middlewares/errorHandler";
 import routes from "./routes";
 import swaggerSpec from "./utils/swagger";
 import {
+  corsConfig,
   cloudinaryConfig,
   applicationConfig,
   expressFileUploadConfig,
@@ -29,7 +30,7 @@ app.locals.title = applicationConfig.appName;
 app.locals.version = applicationConfig.appVersion;
 
 app.use(cookieParser());
-app.use(cors());
+app.use(cors(corsConfig));
 app.use(helmet());
 app.use(morgan("tiny"));
 app.use(express.json());
