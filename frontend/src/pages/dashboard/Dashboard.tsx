@@ -1,7 +1,7 @@
 import { FunctionComponent, useEffect, useMemo, useState } from 'react';
-import { useSelector, TypedUseSelectorHook, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { deletePractitioner, getPractitioners } from '../../redux/slices/practitionerSlice';
-import { AppDispatch, RootState } from '../../redux/store';
+import { AppDispatch, typedUseSelector } from '../../redux/store';
 
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
@@ -23,7 +23,6 @@ import AddIcon from '@mui/icons-material/Add';
 interface DashboardProps {}
 
 const Dashboard: FunctionComponent<DashboardProps> = () => {
-  const typedUseSelector: TypedUseSelectorHook<RootState> = useSelector;
   const practitioners = typedUseSelector(state => state.practitioner.practitioners);
   const isLoading = typedUseSelector(state => state.practitioner.isLoading);
   const dispatch = useDispatch<AppDispatch>();

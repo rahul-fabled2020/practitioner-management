@@ -16,7 +16,11 @@ export function parseJwt(token: string) {
   return JSON.parse(jsonPayload);
 }
 
-export function getUserFromToken(token: string): User {
+export function getUserFromToken(token: string): User | null {
+  if (!token) {
+    return null;
+  }
+
   const parsedJwtBody = parseJwt(token);
 
   return {

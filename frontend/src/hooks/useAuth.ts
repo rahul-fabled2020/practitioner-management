@@ -1,8 +1,6 @@
-import { TypedUseSelectorHook, useSelector } from 'react-redux';
-import { RootState } from '../redux/store';
+import { typedUseSelector } from '../redux/store';
 
 function useAuth() {
-  const typedUseSelector: TypedUseSelectorHook<RootState> = useSelector;
   const { user, accessToken } = typedUseSelector(state => state.auth);
 
   function isLoggedIn() {

@@ -1,0 +1,22 @@
+.header {
+  padding: 20px;
+  background: var(--color-grey-700);
+  display: flex;
+  align-items: center;
+}
+
+.user-wrapper {
+  margin-left: auto;
+}
+
+.header__user {
+  margin-right: 24px;
+  font-weight: bold;
+  color: var(--color-grey-300);
+  font-size: var(--font-lg);
+}
+
+.header__title {
+  color: yellow;
+  font-size: var(--font-xlg);
+}

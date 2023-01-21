@@ -10,6 +10,10 @@ import ProtectedRoute from './components/common/protected-route/ProtectedRoute';
 
 import { setupAxios } from './utils/http';
 
+import withHeader from './hoc/withHeader';
+
+const DashboardWithHeader = withHeader(Dashboard);
+
 function App() {
   const store = useStore();
 
@@ -25,7 +29,7 @@ function App() {
 
           {/* Private Routes */}
           <Route path="/" element={<ProtectedRoute />}>
-            <Route index element={<Dashboard />} />
+            <Route index element={<DashboardWithHeader />} />
             <Route path="/profile" element={<div>Profile</div>} />
           </Route>
 
