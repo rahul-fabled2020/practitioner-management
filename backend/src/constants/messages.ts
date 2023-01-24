@@ -34,3 +34,7 @@ export const AUTH_MESSAGES = {
 export const USER_MESSAGES = {
   EMAIL_ALREADY_EXISTS: MESSAGES.ALREADY_EXISTS("Email"),
 };
+
+export const EXCEPTION_MESSAGES = {
+  UNSUPPORTED_TIME_UNIT: "Unsupported unit of time",
+};

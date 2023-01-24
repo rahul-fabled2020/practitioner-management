@@ -1,5 +1,6 @@
-import swaggerJSDoc from "swagger-jsdoc";
 import dotendv from "dotenv";
+import swaggerJSDoc from "swagger-jsdoc";
+
 import { healthCheckSchema } from "../swagger-schemas/health-check";
 import { practitionerSchema } from "../swagger-schemas/practitioner-schema";
 
@@ -36,6 +37,6 @@ const swaggerOptions = {
 /**
  * Initialize swagger-jsdoc.
  */
-export const swaggerSpec = swaggerJSDoc(swaggerOptions);
+export const swaggerSpec = swaggerJSDoc(swaggerOptions as swaggerJSDoc.Options);
 
 export default swaggerSpec;
